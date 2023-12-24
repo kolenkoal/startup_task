@@ -1,6 +1,5 @@
 from django.urls import path
 
-from links.views import RedirectLinkAPIView
 from . import views
 
 urlpatterns = [
