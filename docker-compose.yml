@@ -23,11 +23,6 @@ services:
     volumes:
       - startup-db-data:/var/lib/postgresql/data
     restart: always
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "devuser", "-d", "devdb" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
     env_file:
       - ./.env
 
