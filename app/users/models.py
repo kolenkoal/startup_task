@@ -3,7 +3,7 @@ from django.db import models
 
 
 class UserManager(BaseUserManager):
-    """User manager in the system for the User model."""
+    """Менеджер пользователей в системе для модели User."""
 
     def create_user(
             self,
@@ -13,13 +13,18 @@ class UserManager(BaseUserManager):
             password=None,
             **extra_fields,
     ):
-        """Creates and saves a User with the given email and password."""
+        """
+        Создает и сохраняет пользователя с указанным email и паролем.
+
+        Raises:
+        - ValueError: Если email, имя или фамилия не указаны.
+        """
         if not email:
-            raise ValueError("Email must be specified.")
+            raise ValueError("Email должен быть указан.")
         if not first_name:
-            raise ValueError("First name must be specified.")
+            raise ValueError("Имя должно быть указано.")
         if not last_name:
-            raise ValueError("Last name must be specified.")
+            raise ValueError("Фамилия должна быть указана.")
 
         user = self.model(
             email=self.normalize_email(email),
@@ -41,14 +46,18 @@ class UserManager(BaseUserManager):
             password=None,
             **extra_fields,
     ):
-        """Creates and saves a superuser with the given email and password."""
+        """
+        Создает и сохраняет суперпользователя с указанным email и паролем.
 
+        Raises:
+        - ValueError: Если email, имя или фамилия не указаны.
+        """
         if not email:
-            raise ValueError("Email must be specified.")
+            raise ValueError("Email должен быть указан.")
         if not first_name:
-            raise ValueError("First name must be specified.")
+            raise ValueError("Имя должно быть указано.")
         if not last_name:
-            raise ValueError("Last name must be specified.")
+            raise ValueError("Фамилия должна быть указана.")
 
         user = self.create_user(
             email=self.normalize_email(email),
@@ -68,7 +77,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    """User in the system."""
+    """Пользователь в системе."""
 
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     first_name = models.CharField(max_length=30)
