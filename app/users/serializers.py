@@ -11,8 +11,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
 
 class UserSignUpSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(
-        write_only=True)  # Ensure password is write-only
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
@@ -20,5 +19,5 @@ class UserSignUpSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data['password'] = make_password(
-            validated_data['password'])  # Hash the password
+            validated_data['password'])
         return super().create(validated_data)
